@@ -3,14 +3,13 @@ import react from "react";
 function Button({
   children,
   type = "button",
-  bgColor = "bg-gray-600",
-  textColor = "text-white",
+  bgColor = "bg-[var(--primary)]",
+  textColor = "text-[var(--primary-content)]",
   className = "",
   ...props
 }) {
-  console.log(type);
   return (
-    <button type={type} className={`rounded-lg p-2 ${bgColor} ${textColor} ${className}`} {...props}>
+    <button type={type} className={`rounded-lg w-full p-2 ${bgColor} ${textColor} ${className}`} {...props}>
       {children}
     </button>
   );

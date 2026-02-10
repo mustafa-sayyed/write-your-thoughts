@@ -8,8 +8,8 @@ import RTE from "./RTE";
 import Select from "./Select";
 import PostForm from "./PostForm/PostForm";
 import PostCard from "./PostCard";
-import Signup from "./Signup";
-import Login from "./Login";
+import Signup from "./SignupForm";
+import Login from "./LoginForm";
 import AuthLayout from "./AuthLayout";
 
 export {

@@ -14,7 +14,6 @@ function AllPost() {
     fetchPosts();
   });
 
-  console.log("posts", posts);
   return (
     <div>
       <Container>

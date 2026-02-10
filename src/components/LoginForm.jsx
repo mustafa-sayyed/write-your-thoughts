@@ -6,7 +6,7 @@ import { login as authLogin } from "../store/authSlice";
 import { useForm } from "react-hook-form";
 import authService from "../appwrite/auth";
 
-function Login() {
+function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
@@ -15,7 +15,6 @@ function Login() {
   const password = useRef(null);
 
   const login = async (data) => {
-    console.log("login"); 
     try {
       setError("");
       const session = await authService.login(data);
@@ -31,16 +30,13 @@ function Login() {
     }
   };
 
-  const test = () => {
-    console.log("testing button");
-  };
-
   return (
-    <div className="p-8 rounded-lg shadow-lg">
+    <div className="w-full bg-[var(--base-200)] border-2 border-[var(--base-300)] max-w-md p-8 rounded-lg shadow-lg">
       <form
         onSubmit={handleSubmit(login)}
         className="flex flex-col items-center justify-center gap-y-3"
       >
+        <h1 className="my-5 text-3xl">Login to you Account</h1>
         <Input
           type="email"
           placeholder="Enter Email"
@@ -61,9 +57,9 @@ function Login() {
         <Button type="submit">Submit</Button>
       </form>
       {error && <div className="text-red-400 text-2xl mt-4 text-center">{error}</div>}
-      <div className="mt-4">
-        Don't have an account
-        <Link to={"/signup"} className="hover:underline duration-200">
+      <div className="mt-6 text-center">
+        <span>Don&apos;t have an account? </span>
+        <Link to={"/signup"} className="hover:underline duration-200 ml-1">
           Sign Up
         </Link>
       </div>
@@ -71,4 +67,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginForm;

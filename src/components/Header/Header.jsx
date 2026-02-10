@@ -7,8 +7,6 @@ function Header() {
   const navigate = useNavigate();
   const authStatus = useSelector((state) => state.status);
 
-  console.log("authStatus", authStatus);
-
   const navItems = [
     {
       name: "Home",
@@ -36,9 +34,8 @@ function Header() {
       active: !authStatus,
     },
   ];
-console.log("navItems", navItems[3]);
   return (
-    <header>
+    <header className="h-16 bg-[var(--base-200)] flex items-center justify-center">
       <Container>
         <nav className="flex justify-around items-center w-4/5">
           <div className="text-2xl font-bold italic">

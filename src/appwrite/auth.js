@@ -1,4 +1,3 @@
-import { coreModuleName } from "@reduxjs/toolkit/query";
 import config from "../config/config";
 import { Client, Account, ID } from "appwrite";
 

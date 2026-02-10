@@ -1,14 +1,21 @@
-import react,{useId} from "react";
+import react, { useId } from "react";
 
-function Input({ label, type = "text", placeholder = "", className = "", ...props }, ref) {
+function Input(
+  { label, type = "text", placeholder = "", className = "", ...props },
+  ref,
+) {
   const id = useId();
-  
+
   return (
-    <div>
-    {label && <label htmlFor={id} className="p-1">{label}</label>}
+    <div className="w-full">
+      {label && (
+        <label htmlFor={id} className="p-1">
+          {label}
+        </label>
+      )}
       <input
         id={id}
-        className={`px-3 py-1.5 rounded-lg text-black ${className}`}
+        className={`px-3 py-1.5 rounded-lg outline-none focus:ring-2 focus:ring-[var(--base-400)] text-[var(--base-content)] bg-[var(--base-100)] w-full ${className}`}
         type={type}
         placeholder={placeholder}
         ref={ref}

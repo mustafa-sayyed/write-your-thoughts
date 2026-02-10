@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Protected({ children, authentication = true }) {
   const navigate = useNavigate();
   const authStatus = useSelector((state) => state.status);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -12,12 +13,11 @@ function Protected({ children, authentication = true }) {
     // agar app auth chahte ho and app ke authStatus false hai to = /login
     // agar app auth nahi chahte ho and app ka autStatus true hai to = /
     if (authentication && authStatus !== authentication) {
-        navigate("/login")
+      navigate("/login");
     } else if (!authentication && authStatus !== authentication) {
-
-        navigate("/")
+      navigate("/");
     }
-  }, [authStatus, authentication, navigate])
+  }, [authStatus, authentication, navigate]);
 
   return loading ? (
     <div className="flex flex-col justify-center items-center min-h-screen text-white">

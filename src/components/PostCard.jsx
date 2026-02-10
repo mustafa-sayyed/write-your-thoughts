@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import service from "../appwrite/service";
 
 function PostCard({ $id, title, image }) {
-  console.log(`PostCard: ${$id}, ${title}, ${image}`);
   return (
     <Link to={`/blog/${$id}`}>
       <div className="w-full p-4 rounded-lg bg-gray-600">

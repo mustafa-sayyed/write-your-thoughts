@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
 import authService from "./appwrite/auth";
 import { useDispatch } from "react-redux";
 import { login, logout } from "./store/authSlice";
@@ -22,21 +21,21 @@ function App() {
         }
       })
       .catch((err) => {
-        console.log("User not found: ", err)
+        console.log("User not found: ", err);
       })
       .finally(() => setLoading(false));
   }, []);
 
   if (loading) {
     return (
-      <div className="flex flex-col justify-center items-center min-h-screen text-white">
-        <div className="animate-spin rounded-full h-16 w-16 border-4 border-red-700 border-b-gray-900"></div>
-        <div className="mt-4 text-lg">Loding......</div>
+      <div className="flex flex-col justify-center items-center min-h-screen bg-[var(--base-100)] text-[var(--base-content)]">
+        <div className="animate-spin rounded-full h-16 w-16 border-4 border-b-[var(--primary-content)]"></div>
+        <div className="mt-4 text-lg">Loading......</div>
       </div>
     );
   }
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-[var(--base-100)] text-[var(--base-content)]">
       <main>
         <Header />
         <Outlet />

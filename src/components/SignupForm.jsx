@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-function Signup() {
+function SignupForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
@@ -16,8 +16,6 @@ function Signup() {
   const [error, setError] = useState("");
 
   const signup = async (data) => {
-    console.log("data", data);
-    console.log("signup called")
     setError("");
     try {
       const userData = await authService.createAccount(data);
@@ -32,16 +30,14 @@ function Signup() {
       setError("Error in signup", error);
     }
   };
-  console.log("signup component")
-  const show = () => { 
-    console.log("show called")
-  }
+
   return (
-    <div className="p-8 rounded-lg shadow-lg">
+    <div className="w-full bg-[var(--base-200)] border-2 border-[var(--base-300)] max-w-md p-8 rounded-lg shadow-lg">
       <form
         onSubmit={handleSubmit(signup)}
         className="flex flex-col items-center justify-center gap-y-3"
       >
+        <h1 className="my-5 text-3xl">Create an Account</h1>
         <Input
           type="text"
           placeholder="Enter Name"
@@ -67,12 +63,12 @@ function Signup() {
             min: 8,
           })}
         />
-        <button type="submit" onClick={show} className="rounded-lg p-2 text-white bg-gray-500">Submit</button>
+        <Button type="submit">Submit</Button>
       </form>
       {error && <div className="text-red-400 text-2xl mt-4 text-center">{error}</div>}
       <div className="text-center mt-4">
-        Already have an account?
-        <Link to={"/login"} className="hover:underline duration-200">
+        <span>Already have an account?</span>
+        <Link to={"/login"} className="hover:underline duration-200 ml-1">
           Login
         </Link>
       </div>
@@ -80,4 +76,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default SignupForm;

@@ -5,6 +5,7 @@ import { set } from "react-hook-form";
 
 function Home() {
   const [posts, setPosts] = useState([]);
+
   useEffect(() => {
     const fetchPost = async () => {
       const allpost = await service.getAllBlogs();
@@ -15,20 +16,17 @@ function Home() {
     fetchPost();
   }, []);
 
-  if (posts.length > 0) {
+  if (posts.length === 0) {
     return (
-      <div className="flex justify-center items-center h-full w-full">
-        <Container>
-          <h1>
-            NO Blogs <br /> Add new Blog to see here
-          </h1>
-        </Container>
+      <div className="min-h-screen h-full w-full flex flex-col justify-center items-center ">
+        <h1 className="text-4xl mb-2"> NO Blogs Found</h1>
+        <h1>Add new Blog to see here</h1> 
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="min-h-screen">
       <Container>
         {posts.map((post) => (
           <div key={post.$id}>

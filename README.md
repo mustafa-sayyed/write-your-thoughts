@@ -1,8 +1,70 @@
-# React + Vite
+# Blog App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-featured blog application built with React and Appwrite backend.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Authentication** - Sign up, login, and logout functionality
+- **Blog Management** - Create, read, update, and delete blog posts
+- **Rich Text Editor** - TinyMCE integration for content creation
+- **Image Upload** - Upload and manage images for blog posts
+- **Protected Routes** - Authentication-based route protection
+- **Dark Mode** - Toggle between light and dark themes
+- **Responsive Design** - Mobile-friendly UI with Tailwind CSS
+
+## Tech Stack
+
+- **Frontend**: React 18, Vite
+- **Backend**: Appwrite (Authentication, Database, Storage)
+- **State Management**: Redux Toolkit
+- **Routing**: React Router v6
+- **Styling**: Tailwind CSS, Shadcn UI
+- **Forms**: React Hook Form
+- **Editor (RTE)**: TinyMCE
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- Appwrite instance (cloud or self-hosted)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd 14-blog-app
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the root directory with your Appwrite credentials:
+   ```env
+   VITE_APPWRITE_URL=your_appwrite_endpoint
+   VITE_APPWRITE_PROJECT_ID=your_project_id
+   VITE_APPWRITE_DATABASE_ID=your_database_id
+   VITE_APPWRITE_COLLECTION_ID=your_collection_id
+   VITE_APPWRITE_BUCKET_ID=your_bucket_id
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Project Structure
+
+```
+src/
+├── appwrite/       # Appwrite service configurations
+├── components/     # Reusable UI components
+├── config/         # App configuration
+├── lib/            # Utility functions
+├── pages/          # Page components
+└── store/          # Redux store and slices
+```
+

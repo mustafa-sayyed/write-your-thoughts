@@ -5,6 +5,7 @@ import { login } from "../store/authSlice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Spinner } from "./ui/spinner";
 
 function SignupForm() {
   const dispatch = useDispatch();
@@ -14,9 +15,11 @@ function SignupForm() {
   const password = useRef(null);
   const name = useRef(null);
   const [error, setError] = useState("");
+  const [isCreatingAccount, setIsCreatingAccount] = useState(false);
 
   const signup = async (data) => {
     setError("");
+    setIsCreatingAccount(true);
     try {
       const userData = await authService.createAccount(data);
       if (userData) {
@@ -27,7 +30,9 @@ function SignupForm() {
         }
       }
     } catch (error) {
-      setError("Error in signup", error);
+      setError("Error in signup: " + error.message);
+    } finally {
+      setIsCreatingAccount(false);
     }
   };
 
@@ -63,7 +68,14 @@ function SignupForm() {
             min: 8,
           })}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          {isCreatingAccount ?
+            <div className="flex items-center justify-center gap-2">
+              <Spinner />
+              <span>Creating Account...</span>
+            </div>
+          : "Create Account"}
+        </Button>
       </form>
       {error && <div className="text-red-400 text-2xl mt-4 text-center">{error}</div>}
       <div className="text-center mt-4">

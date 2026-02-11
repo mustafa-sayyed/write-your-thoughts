@@ -15,7 +15,7 @@ function Input(
       )}
       <input
         id={id}
-        className={`px-3 py-1.5 rounded-lg outline-none focus:ring-2 focus:ring-[var(--base-400)] text-[var(--base-content)] bg-[var(--base-100)] w-full ${className}`}
+        className={`px-3 py-1.5 rounded-lg outline-none focus:ring-2 focus:ring-(--base-400) text-(--base-content) border-2 bg-(--base-100) w-full ${className}`}
         type={type}
         placeholder={placeholder}
         ref={ref}

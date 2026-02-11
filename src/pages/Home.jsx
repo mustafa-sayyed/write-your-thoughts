@@ -1,38 +1,142 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import service from "../appwrite/service";
-import { Container, PostCard } from "../components/index";
-import { set } from "react-hook-form";
+import { Button, Container, PostCard } from "../components/index";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Image, NotebookTextIcon, Pencil, Plus, Share2 } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const authStatus = useSelector((state) => state.auth.status);
 
   useEffect(() => {
     const fetchPost = async () => {
-      const allpost = await service.getAllBlogs();
-      if (allpost) {
-        setPosts(allpost.documents);
+      try {
+        const allpost = await service.getAllBlogs();
+        if (allpost) {
+          setPosts(allpost.documents);
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchPost();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="flex items-center gap-2">
+          <Spinner className="size-6" />
+          <p className="text-base-400">Loading posts...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (posts.length === 0) {
     return (
-      <div className="min-h-screen h-full w-full flex flex-col justify-center items-center ">
-        <h1 className="text-4xl mb-2"> NO Blogs Found</h1>
-        <h1>Add new Blog to see here</h1> 
+      <div className="min-h-screen">
+        <Container>
+          <div className="py-20 text-center">
+            <div className="max-w-3xl mx-auto">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                <NotebookTextIcon />
+              </div>
+
+              <h1 className="text-4xl md:text-5xl font-bold text-base-content mb-4">
+                Welcome to{" "}
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  BlogApp
+                </span>
+              </h1>
+
+              <p className="text-xl text-base-400 mb-8">
+                Your space to share ideas, stories, and connect with readers around the
+                world.
+              </p>
+
+              {authStatus ?
+                <Button className="w-fit p-3 px-6">
+                  <Link to="/add-post" className="flex items-center gap-2">
+                    <Plus />
+                    Create Your First Post
+                  </Link>
+                </Button>
+              : <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button className="w-fit p-3 px-6">
+                    <Link to="/login">Sign In to Start</Link>
+                  </Button>
+
+                  <Button className="w-fit p-3 px-6">
+                    <Link to="/signup">Create Account</Link>
+                  </Button>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-12">
+            <div className="bg-base-200 border border-(--base-300) hover:border-(--base-400) rounded-xl p-6 text-center">
+              <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Pencil />
+              </div>
+              <h3 className="text-lg font-semibold text-base-content mb-2">
+                Easy Writing
+              </h3>
+              <p className="text-base-400 text-sm">
+                Rich text editor to bring your stories to life
+              </p>
+            </div>
+
+            <div className="bg-base-200 border border-(--base-300) hover:border-(--base-400) rounded-xl p-6 text-center">
+              <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-secondary/10 flex items-center justify-center">
+                <Image />
+              </div>
+              <h3 className="text-lg font-semibold text-base-content mb-2">
+                Media Support
+              </h3>
+              <p className="text-base-400 text-sm">
+                Add images to make your posts stand out
+              </p>
+            </div>
+
+            <div className="bg-base-200 border border-(--base-300) hover:border-(--base-400) rounded-xl p-6 text-center">
+              <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-accent/10 flex items-center justify-center">
+                <Share2 />
+              </div>
+              <h3 className="text-lg font-semibold text-base-content mb-2">
+                Share & Connect
+              </h3>
+              <p className="text-base-400 text-sm">
+                Share your posts with readers worldwide
+              </p>
+            </div>
+          </div>
+        </Container>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen py-8">
       <Container>
-        {posts.map((post) => (
-          <div key={post.$id}>
-            <PostCard {...post} />
-          </div>
-        ))}
+        {/* Page Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-base-content">Latest Posts</h1>
+          <p className="text-base-400 mt-1">Discover stories, ideas, and expertise</p>
+        </div>
+
+        {/* Posts Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <PostCard key={post.$id} {...post} />
+          ))}
+        </div>
       </Container>
     </div>
   );

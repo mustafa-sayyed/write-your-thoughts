@@ -4,6 +4,7 @@ import { RTE, Button, Input, Select } from "../index";
 import service from "../../appwrite/service";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Pencil, Plus } from "lucide-react";
 
 function PostForm({ post }) {
   const { register, handleSubmit, control, watch, setValue, getValues, reset } = useForm({
@@ -16,7 +17,7 @@ function PostForm({ post }) {
   });
 
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.userData);
+  const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
     if (post) {
@@ -43,7 +44,7 @@ function PostForm({ post }) {
       if (dbPost) {
         navigate(`/blog/${dbPost.blogId}`);
       } else {
-        console.log("error ")
+        console.log("error ");
       }
     }
   };
@@ -77,45 +78,122 @@ function PostForm({ post }) {
   }, [watch, slugTransform, setValue]);
 
   return (
-    <form
-      onSubmit={handleSubmit(submit)}
-      className="flex flex-col items-center justify-center gap-y-10"
-    >
-      <Input
-        type="text"
-        label="Title: "
-        placeholder="Enter title"
-        className="mt-2"
-        {...register("title", { required: true })}
-      />
-      <Input
-        type="text"
-        label="Slug: "
-        placeholder="Enter slug"
-        {...register("slug", { required: true })}
-        onInput={(e) => setValue("slug", slugTransform(e.target.value))}
-      />
-      <RTE control={control} defaultValues={getValues("content")} name={"content"} />
-      <Input
-        type="file"
-        label="Image: "
-        className=""
-        accepts="iamge/png, image/jpeg, image/jpg"
-        {...register("image", {
-          required: !post,
-        })}
-      />
-      {post && <img src={service.getPreview(post.image)} alt={post.title} className="w-[600px] rounded-lg"/>}
-      <Select
-        label="Status: "
-        options={["active", "inactive"]}
-        className="p-2 rounded-lg px-4"
-        {...register("status", { required: true })}
-      />
-      <button type="submit" className="p-2 px-4 rounded-lg bg-gray-500 text-white">
-        {post ? "Update" : "Submit"}
-      </button>
-    </form>
+    <div className="max-w-4xl mx-auto">
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-bold text-base-content">
+          {post ? "Edit Your Post" : "Create New Post"}
+        </h1>
+        <p className="text-base-400 mt-2">
+          {post ? "Update your post details below" : "Share your thoughts with the world"}
+        </p>
+      </div>
+
+      <form
+        onSubmit={handleSubmit(submit)}
+        className="bg-base-200 border border-base-300 rounded-2xl shadow-lg p-6 md:p-8 space-y-6"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Input
+            type="text"
+            label="Title"
+            placeholder="Enter an engaging title"
+            {...register("title", { required: true })}
+          />
+          <Input
+            type="text"
+            label="Slug"
+            placeholder="auto-generated-slug"
+            {...register("slug", { required: true })}
+            onInput={(e) => setValue("slug", slugTransform(e.target.value))}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-base-content mb-1.5">
+            Content
+          </label>
+          <div className="rounded-lg overflow-hidden border border-base-300">
+            <RTE
+              control={control}
+              defaultValues={getValues("content")}
+              name={"content"}
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 place-items-center">
+          <div>
+            <label className="block text-sm font-medium text-base-content mb-1">
+              Featured Image
+            </label>
+            <div className="relative">
+              <input
+                type="file"
+                accept="image/png, image/jpeg, image/jpg"
+                className="
+                  w-full px-4 py-2
+                  bg-base-100 text-base-content
+                  border-2 border-base-300
+                  rounded-lg
+                  cursor-pointer
+                  transition-all duration-fast
+                  hover:border-primary hover:bg-primary/5
+                  file:mr-4 file:py-1 file:px-4
+                  file:rounded-lg file:border-0
+                  file:text-sm file:font-medium
+                  file:bg-primary file:text-primary-foreground
+                  file:cursor-pointer file:transition-all"
+                {...register("image", {
+                  required: !post,
+                })}
+              />
+            </div>
+          </div>
+
+          <Select
+            label="Status"
+            options={["active", "inactive"]}
+            {...register("status", { required: true })}
+          />
+        </div>
+
+        {post && post.image && (
+          <div>
+            <label className="block text-sm font-medium text-base-content mb-1.5">
+              Current Image
+            </label>
+            <div className="relative rounded-xl overflow-hidden border border-base-300 bg-base-300">
+              <img
+                src={service.getPreview(post.image)}
+                alt={post.title}
+                className="w-full max-h-80 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
+          </div>
+        )}
+
+        <div className="pt-4 flex justify-end">
+          <Button
+            type="submit"
+            className="w-fit px-8 py-2"
+          >
+            <span className="flex items-center gap-2">
+              {post ?
+                <div className="flex items-center gap-2">
+                  <Pencil />
+                  Update Post
+                </div>
+              : <div className="flex items-center gap-2">
+                  <Plus />
+                  Publish Post
+                </div>
+              }
+            </span>
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 }
 

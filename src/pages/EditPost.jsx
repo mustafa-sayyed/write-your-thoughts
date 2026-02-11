@@ -5,16 +5,26 @@ import { PostForm } from "../components";
 import service from "../appwrite/service";
 
 function EditPost() {
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
     const fetchPost = async () => {
       if (id) {
-        const post = await service.getBlog(id);
-        if (post) {
-          setPost(post);
+        try {
+          const fetchedPost = await service.getBlog(id);
+          if (fetchedPost) {
+            setPost(fetchedPost);
+          } else {
+            navigate("/");
+          }
+        } catch (error) {
+          console.error("Error fetching post:", error);
+          navigate("/");
+        } finally {
+          setLoading(false);
         }
       } else {
         navigate("/");
@@ -23,11 +33,24 @@ function EditPost() {
     fetchPost();
   }, [navigate, id]);
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-base-400">Loading post...</p>
+        </div>
+      </div>
+    );
+  }
+
   return post ? (
-    <Container>
-      <PostForm post={post} />
-    </Container>
-  ): null;
+    <div className="min-h-screen py-8">
+      <Container>
+        <PostForm post={post} />
+      </Container>
+    </div>
+  ) : null;
 }
 
 export default EditPost;

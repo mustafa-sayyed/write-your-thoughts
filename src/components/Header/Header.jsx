@@ -5,13 +5,13 @@ import { Container, LogoutBtn } from "../index";
 
 function Header() {
   const navigate = useNavigate();
-  const authStatus = useSelector((state) => state.status);
+  const authStatus = useSelector((state) => state.auth.status);
 
   const navItems = [
     {
       name: "Home",
       path: "/",
-      active: true,
+      active: authStatus,
     },
     {
       name: "All Post",
@@ -35,26 +35,22 @@ function Header() {
     },
   ];
   return (
-    <header className="h-16 bg-[var(--base-200)] flex items-center justify-center">
+    <header className="h-16 bg-(--base-200) flex items-center justify-center">
       <Container>
-        <nav className="flex justify-around items-center w-4/5">
+        <nav className="flex justify-between items-center">
           <div className="text-2xl font-bold italic">
-            <Link to="/">Blog App</Link>
+            <Link to="/">Write Your Thoughts</Link>
           </div>
-          <ul className="flex justify-around items-center w-2/5">
+          <ul className="flex items-center gap-6">
             {navItems.map((item, index) =>
-              item.active ? (
-                <li key={index}>
-                  <button onClick={() => navigate(item.path)}>{item.name}</button>
+              item.active ?
+                <li key={index} className="hover:underline underline-offset-2">
+                  <Link to={item.path}>{item.name}</Link>
                 </li>
-              ) : null
-            )}
-            {authStatus && (
-              <li>
-                <LogoutBtn />
-              </li>
+              : null,
             )}
           </ul>
+          {authStatus && <LogoutBtn />}
         </nav>
       </Container>
     </header>

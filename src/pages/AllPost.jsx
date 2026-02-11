@@ -29,7 +29,7 @@ function AllPost() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="flex items-center gap-2">
           <Spinner className="size-6" />
-          <p className="text-base-400">Loading posts...</p>
+          <p className="text-muted-foreground">Loading posts...</p>
         </div>
       </div>
     );
@@ -39,8 +39,8 @@ function AllPost() {
     <div className="min-h-screen py-8">
       <Container>
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-base-content">All Posts</h1>
-          <p className="text-base-400 mt-1">Browse through all published articles</p>
+          <h1 className="text-3xl font-bold text-foreground">All Posts</h1>
+          <p className="text-muted-foreground mt-1">Browse through all published articles</p>
         </div>
 
         {posts.length > 0 ? (
@@ -51,11 +51,11 @@ function AllPost() {
           </div>
         ) : (
           <div className="text-center py-16">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-base-300 flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-muted flex items-center justify-center">
               <NotebookTextIcon />
             </div>
-            <h2 className="text-xl font-semibold text-base-content mb-2">No posts yet</h2>
-            <p className="text-base-400">Be the first to share your story!</p>
+            <h2 className="text-xl font-semibold text-foreground mb-2">No posts yet</h2>
+            <p className="text-muted-foreground">Be the first to share your story!</p>
           </div>
         )}
       </Container>

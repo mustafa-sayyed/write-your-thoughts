@@ -5,9 +5,9 @@ import service from "../appwrite/service";
 function PostCard({ $id, title, image }) {
   return (
     <Link to={`/blog/${$id}`} className="group block">
-      <article className="bg-base-100 rounded-xl overflow-hidden border border-base-300 shadow-md hover:shadow-xl transition-all duration-normal hover:-translate-y-1">
+      <article className="bg-background rounded-xl overflow-hidden border border-border shadow-md hover:shadow-xl transition-all duration-normal hover:-translate-y-1">
         {/* Image Container */}
-        <div className="relative aspect-video overflow-hidden bg-base-200">
+        <div className="relative aspect-video overflow-hidden bg-muted">
           <img 
             src={service.getPreview(image)} 
             alt={title} 
@@ -19,7 +19,7 @@ function PostCard({ $id, title, image }) {
         
         {/* Content */}
         <div className="p-4">
-          <h2 className="text-lg font-semibold text-base-content line-clamp-2 group-hover:text-primary transition-colors duration-fast">
+          <h2 className="text-lg font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors duration-fast">
             {title}
           </h2>
           

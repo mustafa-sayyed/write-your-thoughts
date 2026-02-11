@@ -4,6 +4,7 @@ import authService from "../../appwrite/auth";
 import { logout } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
+import { Button } from "../ui/button";
 
 function LogoutBtn() {
   const navigate = useNavigate();
@@ -21,13 +22,10 @@ function LogoutBtn() {
   };
 
   return (
-    <button
-      onClick={handleLogout}
-      className="bg-transparent border-2 py-1.5 px-6 text-(--base-content) border-(--base-300) hover:bg-error/10 flex items-center hover:bg-(--base-300) gap-2 rounded-md cursor-pointer"
-    >
+    <Button variant="outline" className="cursor-pointer flex items-center gap-2" onClick={handleLogout}>
       <LogOut size={16} />
       Logout
-    </button>
+    </Button>
   );
 }
 

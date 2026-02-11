@@ -1,11 +1,14 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, LogoutBtn } from "../index";
+import { Moon, Sun } from "lucide-react";
+import { toggleTheme } from "@/store/themeSlice";
+import { Button } from "../ui/button";
 
 function Header() {
-  const navigate = useNavigate();
   const authStatus = useSelector((state) => state.auth.status);
+  const theme = useSelector((state) => state.theme.theme);
+  const dispatch = useDispatch();
 
   const navItems = [
     {
@@ -35,7 +38,7 @@ function Header() {
     },
   ];
   return (
-    <header className="h-16 bg-(--base-200) flex items-center justify-center">
+    <header className="h-16 bg-card flex items-center justify-center">
       <Container>
         <nav className="flex justify-between items-center">
           <div className="text-2xl font-bold italic">
@@ -50,7 +53,18 @@ function Header() {
               : null,
             )}
           </ul>
-          {authStatus && <LogoutBtn />}
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="cursor-pointer"
+              onClick={() => dispatch(toggleTheme())}
+            >
+              {theme === "light" ?
+                <Sun />
+              : <Moon />}
+            </Button>
+            {authStatus && <LogoutBtn />}
+          </div>
         </nav>
       </Container>
     </header>

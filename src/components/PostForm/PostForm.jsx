@@ -80,17 +80,17 @@ function PostForm({ post }) {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-base-content">
+        <h1 className="text-3xl font-bold text-foreground">
           {post ? "Edit Your Post" : "Create New Post"}
         </h1>
-        <p className="text-base-400 mt-2">
+        <p className="text-muted-foreground mt-2">
           {post ? "Update your post details below" : "Share your thoughts with the world"}
         </p>
       </div>
 
       <form
         onSubmit={handleSubmit(submit)}
-        className="bg-base-200 border border-base-300 rounded-2xl shadow-lg p-6 md:p-8 space-y-6"
+        className="bg-card border border-border rounded-2xl shadow-lg p-6 md:p-8 space-y-6"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Input
@@ -109,10 +109,10 @@ function PostForm({ post }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-base-content mb-1.5">
+          <label className="block text-sm font-medium text-foreground mb-1.5">
             Content
           </label>
-          <div className="rounded-lg overflow-hidden border border-base-300">
+          <div className="rounded-lg overflow-hidden border border-border">
             <RTE
               control={control}
               defaultValues={getValues("content")}
@@ -123,7 +123,7 @@ function PostForm({ post }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 place-items-center">
           <div>
-            <label className="block text-sm font-medium text-base-content mb-1">
+            <label className="block text-sm font-medium text-foreground mb-1">
               Featured Image
             </label>
             <div className="relative">
@@ -132,8 +132,8 @@ function PostForm({ post }) {
                 accept="image/png, image/jpeg, image/jpg"
                 className="
                   w-full px-4 py-2
-                  bg-base-100 text-base-content
-                  border-2 border-base-300
+                  bg-background text-foreground
+                  border-2 border-border
                   rounded-lg
                   cursor-pointer
                   transition-all duration-fast
@@ -159,10 +159,10 @@ function PostForm({ post }) {
 
         {post && post.image && (
           <div>
-            <label className="block text-sm font-medium text-base-content mb-1.5">
+            <label className="block text-sm font-medium text-foreground mb-1.5">
               Current Image
             </label>
-            <div className="relative rounded-xl overflow-hidden border border-base-300 bg-base-300">
+            <div className="relative rounded-xl overflow-hidden border border-border bg-muted">
               <img
                 src={service.getPreview(post.image)}
                 alt={post.title}

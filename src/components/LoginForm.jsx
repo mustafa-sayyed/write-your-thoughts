@@ -36,7 +36,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="w-full bg-[var(--base-200)] border-2 border-[var(--base-300)] max-w-md p-8 rounded-lg shadow-lg">
+    <div className="w-full bg-card border-2 border-border max-w-md p-8 rounded-lg shadow-lg">
       <form
         onSubmit={handleSubmit(login)}
         className="flex flex-col items-center justify-center gap-y-3"

@@ -32,7 +32,7 @@ function Home() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="flex items-center gap-2">
           <Spinner className="size-6" />
-          <p className="text-base-400">Loading posts...</p>
+          <p className="text-muted-foreground">Loading posts...</p>
         </div>
       </div>
     );
@@ -44,18 +44,18 @@ function Home() {
         <Container>
           <div className="py-20 text-center">
             <div className="max-w-3xl mx-auto">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-linear-to-tr from-primary/20 to-accent/20 flex items-center justify-center">
                 <NotebookTextIcon />
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold text-base-content mb-4">
+              <h1 className="text-4xl md:text-4xl font-bold text-foreground mb-4">
                 Welcome to{" "}
-                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  BlogApp
+                <span className="text-primary italic">
+                  Write Your Thoughts
                 </span>
               </h1>
 
-              <p className="text-xl text-base-400 mb-8">
+              <p className="text-xl text-muted-foreground mb-8">
                 Your space to share ideas, stories, and connect with readers around the
                 world.
               </p>
@@ -81,38 +81,38 @@ function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-12">
-            <div className="bg-base-200 border border-(--base-300) hover:border-(--base-400) rounded-xl p-6 text-center">
+            <div className="bg-card border border-border hover:border-muted-foreground rounded-xl p-6 text-center">
               <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Pencil />
               </div>
-              <h3 className="text-lg font-semibold text-base-content mb-2">
+              <h3 className="text-lg font-semibold text-foreground mb-2">
                 Easy Writing
               </h3>
-              <p className="text-base-400 text-sm">
+              <p className="text-muted-foreground text-sm">
                 Rich text editor to bring your stories to life
               </p>
             </div>
 
-            <div className="bg-base-200 border border-(--base-300) hover:border-(--base-400) rounded-xl p-6 text-center">
+            <div className="bg-card border border-border hover:border-muted-foreground rounded-xl p-6 text-center">
               <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-secondary/10 flex items-center justify-center">
                 <Image />
               </div>
-              <h3 className="text-lg font-semibold text-base-content mb-2">
+              <h3 className="text-lg font-semibold text-foreground mb-2">
                 Media Support
               </h3>
-              <p className="text-base-400 text-sm">
+              <p className="text-muted-foreground text-sm">
                 Add images to make your posts stand out
               </p>
             </div>
 
-            <div className="bg-base-200 border border-(--base-300) hover:border-(--base-400) rounded-xl p-6 text-center">
+            <div className="bg-card border border-border hover:border-muted-foreground rounded-xl p-6 text-center">
               <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-accent/10 flex items-center justify-center">
                 <Share2 />
               </div>
-              <h3 className="text-lg font-semibold text-base-content mb-2">
+              <h3 className="text-lg font-semibold text-foreground mb-2">
                 Share & Connect
               </h3>
-              <p className="text-base-400 text-sm">
+              <p className="text-muted-foreground text-sm">
                 Share your posts with readers worldwide
               </p>
             </div>
@@ -127,8 +127,8 @@ function Home() {
       <Container>
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-base-content">Latest Posts</h1>
-          <p className="text-base-400 mt-1">Discover stories, ideas, and expertise</p>
+          <h1 className="text-3xl font-bold text-foreground">Latest Posts</h1>
+          <p className="text-muted-foreground mt-1">Discover stories, ideas, and expertise</p>
         </div>
 
         {/* Posts Grid */}

@@ -9,6 +9,7 @@ import { Spinner } from "./components/ui/spinner";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     authService
@@ -24,18 +25,24 @@ function App() {
         console.log("User not found: ", err);
       })
       .finally(() => setLoading(false));
+      const existingTheme = localStorage.getItem("theme");
+      if (existingTheme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
   }, []);
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center gap-2 text-lg min-h-screen bg-(--base-100) text-(--base-content)">
+      <div className="flex justify-center items-center gap-2 text-lg min-h-screen bg-background text-foreground">
         <Spinner className="size-6" />
         <div className="">Loading......</div>
       </div>
     );
   }
   return (
-    <div className="min-h-screen bg-(--base-100) text-(--base-content)">
+    <div className="min-h-screen bg-background text-foreground">
       <main>
         <Header />
         <Outlet />

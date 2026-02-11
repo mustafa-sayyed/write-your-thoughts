@@ -48,7 +48,7 @@ function Post() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-base-400">Loading post...</p>
+          <p className="text-muted-foreground">Loading post...</p>
         </div>
       </div>
     );
@@ -79,8 +79,8 @@ function Post() {
 
           {/* Author Actions */}
           {isAuthorised && (
-            <div className="flex flex-wrap gap-3 mb-8 p-4 bg-base-200 rounded-xl border border-base-300">
-              <p className="flex-1 flex items-center text-sm text-base-400">
+            <div className="flex flex-wrap gap-3 mb-8 p-4 bg-card rounded-xl border border-border">
+              <p className="flex-1 flex items-center text-sm text-muted-foreground">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -115,15 +115,15 @@ function Post() {
           )}
 
           {/* Content */}
-          <div className="bg-base-200 border border-base-300 rounded-2xl p-6 md:p-10 shadow-lg">
-            <div className="prose prose-lg max-w-none text-base-content
-              prose-headings:text-base-content prose-headings:font-bold
-              prose-p:text-base-content/90 prose-p:leading-relaxed
+          <div className="bg-card border border-border rounded-2xl p-6 md:p-10 shadow-lg">
+            <div className="prose prose-lg max-w-none text-foreground
+              prose-headings:text-foreground prose-headings:font-bold
+              prose-p:text-foreground/90 prose-p:leading-relaxed
               prose-a:text-primary hover:prose-a:text-primary-hover
-              prose-strong:text-base-content prose-strong:font-semibold
-              prose-ul:text-base-content/90 prose-ol:text-base-content/90
-              prose-blockquote:border-l-primary prose-blockquote:text-base-content/80
-              prose-code:text-primary prose-code:bg-base-300 prose-code:px-1 prose-code:rounded
+              prose-strong:text-foreground prose-strong:font-semibold
+              prose-ul:text-foreground/90 prose-ol:text-foreground/90
+              prose-blockquote:border-l-primary prose-blockquote:text-foreground/80
+              prose-code:text-primary prose-code:bg-muted prose-code:px-1 prose-code:rounded
             ">
               {parse(String(post.content))}
             </div>

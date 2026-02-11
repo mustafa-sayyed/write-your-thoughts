@@ -1,8 +1,12 @@
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import { Editor } from "@tinymce/tinymce-react";
+import { useSelector } from "react-redux";
 
 function RTE({ control, name, defaultValues = "" }) {
+  const theme = useSelector((state) => state.theme.theme);
+
+  
   return (
     <div>
       <Controller
@@ -11,12 +15,12 @@ function RTE({ control, name, defaultValues = "" }) {
         rules={{ required: true }}
         render={({ field: { onChange } }) => (
           <Editor
-          apiKey="1ufdrwisc3mfrnu5z0a4pmrplj5581tdfyibs9mrijg0bi56"
+          apiKey={`${import.meta.env.VITE_TINYMCE_API_KEY}`}
             initialValue={defaultValues}
             init={{
               branding: false,
-              content_css: "dark",
-              skin: "oxide-dark",
+              content_css: theme === "dark" ? "dark" : "default",
+              skin: theme === "dark" ? "oxide-dark" : "oxide",
               height: 400,
               menubar: true,
               plugins: [
